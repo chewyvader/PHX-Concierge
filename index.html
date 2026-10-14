@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phoenix Concierge Practice · Acquisition Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bone:#FBFAF7;
+    --panel:#F2EFE8;
+    --panel2:#EAE5DB;
+    --ink:#191816;
+    --soft:#5F5A51;
+    --faint:#8C867B;
+    --rule:#DCD7CC;
+    --clay:#B4522E;
+    --teal:#2F6B5F;
+    --ochre:#A3812C;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Inter',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bone);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--clay);text-decoration:none;border-bottom:1px solid rgba(180,82,46,.3)}
+  a:hover{border-bottom-color:var(--clay)}
+
+  /* ---------- shell ---------- */
+  .wrap{display:grid;grid-template-columns:232px minmax(0,1fr);max-width:1320px;margin:0 auto}
+  .toc{
+    position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
+    padding:46px 26px 40px 30px;border-right:1px solid var(--rule);
+  }
+  .toc .mark{font-family:var(--serif);font-weight:700;font-size:17px;letter-spacing:-.02em;line-height:1.15}
+  .toc .mark span{display:block;font-family:var(--mono);font-size:9px;font-weight:400;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-top:7px}
+  .toc ol{list-style:none;margin-top:30px;counter-reset:toc}
+  .toc li{counter-increment:toc;margin-bottom:1px}
+  .toc a{
+    display:flex;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;
+    color:var(--soft);border:0;padding:5px 7px 5px 0;line-height:1.45;
+  }
+  .toc a::before{content:counter(toc,decimal-leading-zero);color:var(--faint);flex:none}
+  .toc a:hover{color:var(--ink)}
+  .toc a.on{color:var(--clay)}
+  .toc a.on::before{color:var(--clay)}
+  .toc .stamp{margin-top:28px;padding-top:16px;border-top:1px solid var(--rule);
+    font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--faint);line-height:1.9;text-transform:uppercase}
+
+  main{padding:46px clamp(26px,5vw,76px) 120px}
+
+  /* ---------- masthead ---------- */
+  .mast{border-bottom:2px solid var(--ink);padding-bottom:26px}
+  .kicker{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--clay);margin-bottom:20px}
+  h1{font-family:var(--serif);font-weight:700;font-size:clamp(34px,5vw,60px);
+    line-height:1.02;letter-spacing:-.025em;max-width:16ch}
+  .deck{font-size:clamp(15px,1.5vw,18.5px);line-height:1.55;color:var(--soft);
+    max-width:62ch;margin-top:20px}
+  .byline{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)}
+  .byline b{color:var(--ink);font-weight:500}
+
+  /* ---------- sections ---------- */
+  section{padding-top:52px;scroll-margin-top:0}
+  .snum{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--clay);
+    display:flex;align-items:center;gap:13px;margin-bottom:13px}
+  .snum::after{content:"";height:1px;flex:1;background:var(--rule)}
+  h2{font-family:var(--serif);font-weight:600;font-size:clamp(23px,2.6vw,33px);
+    line-height:1.12;letter-spacing:-.02em;max-width:24ch}
+  h3{font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:-.005em;margin-bottom:6px}
+  p{max-width:68ch;margin-top:15px;color:var(--soft)}
+  p strong{color:var(--ink);font-weight:600}
+  p.lead{font-size:17.5px;color:var(--ink);margin-top:17px;max-width:64ch}
+
+  /* ---------- figure chrome ---------- */
+  figure{margin-top:28px;max-width:1000px}
+  figcaption{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--faint);margin-top:11px;line-height:1.7;max-width:92ch}
+  figcaption b{color:var(--ochre);font-weight:500;margin-right:8px}
+
+  /* ---------- number band ---------- */
+  .band{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    border-top:1px solid var(--ink);border-bottom:1px solid var(--rule)}
+  .band > div{padding:18px 20px 18px 0;border-right:1px solid var(--rule)}
+  .band > div:last-child{border-right:0}
+  .band .n{font-family:var(--serif);font-weight:700;font-size:clamp(25px,2.9vw,34px);
+    letter-spacing:-.03em;line-height:1}
+  .band .n.clay{color:var(--clay)}
+  .band .n.teal{color:var(--teal)}
+  .band .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--faint);margin-top:10px;line-height:1.65}
+
+  /* ---------- tables ---------- */
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  th{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--faint);font-weight:400;text-align:left;padding:0 16px 9px 0;
+    border-bottom:1px solid var(--ink)}
+  td{padding:11px 16px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--soft)}
+  td:first-child{color:var(--ink)}
+  td.n,th.n{font-family:var(--mono);text-align:right;padding-right:0;font-size:13px;white-space:nowrap}
+  tr.hi td{background:var(--panel);color:var(--ink)}
+  tr.hi td:first-child{font-weight:600;box-shadow:inset 3px 0 0 var(--clay)}
+  tr.sum td{border-bottom:0;border-top:1px solid var(--ink);font-family:var(--serif);
+    font-weight:600;font-size:16px;color:var(--teal);padding-top:13px}
+  tr.grp td{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--clay);padding-top:24px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+  td.rk{font-family:var(--serif);font-weight:700;font-size:17px;color:var(--clay);
+    width:38px;padding-right:0}
+  td.ix{padding-left:22px}
+
+  /* ---------- range figure ---------- */
+  .ranges{border-top:1px solid var(--ink)}
+  .rrow{display:grid;grid-template-columns:clamp(132px,16vw,196px) minmax(0,1fr) clamp(76px,8vw,96px);
+    align-items:center;gap:18px;padding:14px 0;border-bottom:1px solid var(--rule)}
+  .rrow.hi{background:var(--panel)}
+  .rlab{font-size:13.5px;line-height:1.3}
+  .rlab em{display:block;font-style:normal;font-family:var(--mono);font-size:9.5px;
+    color:var(--faint);margin-top:3px;letter-spacing:.06em}
+  .rrow.hi .rlab{font-weight:600;color:var(--clay)}
+  .rtrack{position:relative;height:16px}
+  .rtrack::before{content:"";position:absolute;left:0;right:0;top:7px;height:1px;background:var(--rule)}
+  .rbar{position:absolute;top:4px;height:8px;background:var(--ink)}
+  .rrow.hi .rbar{background:var(--clay)}
+  .rval{font-family:var(--mono);font-size:12px;text-align:right;color:var(--soft)}
+  .rrow.hi .rval{color:var(--clay);font-weight:500}
+  .axis{display:grid;grid-template-columns:clamp(132px,16vw,196px) minmax(0,1fr) clamp(76px,8vw,96px);
+    gap:18px;padding-top:9px}
+  .ticks{display:flex;justify-content:space-between;font-family:var(--mono);
+    font-size:9.5px;color:var(--faint);letter-spacing:.06em}
+
+  /* ---------- column bars ---------- */
+  .cols{display:flex;align-items:flex-end;gap:clamp(16px,4vw,54px);height:208px;
+    border-bottom:1px solid var(--ink);padding-bottom:0}
+  .cbar{flex:1;max-width:124px;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+  .cbar .fill{width:100%;background:var(--ink);position:relative}
+  .cbar.a .fill{background:var(--teal)}
+  .cbar.b .fill{background:var(--ochre)}
+  .cbar.c .fill{background:var(--clay)}
+  .cbar .amt{font-family:var(--serif);font-weight:700;font-size:19px;letter-spacing:-.02em;
+    margin-bottom:8px;text-align:center}
+  .clabs{display:flex;gap:clamp(16px,4vw,54px);margin-top:11px}
+  .clabs div{flex:1;max-width:124px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--faint);text-align:center;line-height:1.6}
+
+  /* ---------- cards ---------- */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(236px,1fr));gap:1px;
+    background:var(--rule);border:1px solid var(--rule)}
+  .card{background:var(--bone);padding:20px 22px 22px}
+  .card .t{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--clay);margin-bottom:11px}
+  .card p{font-size:13.5px;line-height:1.55;margin-top:0;max-width:none}
+
+  /* ---------- callout ---------- */
+  .pull{border-left:3px solid var(--clay);padding:4px 0 4px 22px;margin-top:30px;max-width:66ch}
+  .pull p{font-family:var(--serif);font-size:clamp(18px,1.9vw,23px);line-height:1.34;
+    color:var(--ink);font-weight:400;margin-top:0;max-width:none}
+  .flag{background:var(--panel);border-top:1px solid var(--ink);padding:20px 24px;margin-top:30px;max-width:1000px}
+  .flag .t{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--clay);margin-bottom:9px}
+  .flag p{margin-top:0;font-size:14px;max-width:none}
+
+  /* ---------- sources ---------- */
+  .srcs{border-top:1px solid var(--ink);margin-top:26px}
+  .srow{display:grid;grid-template-columns:clamp(104px,12vw,146px) minmax(0,1fr);gap:22px;
+    padding:15px 0;border-bottom:1px solid var(--rule)}
+  .srow .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre)}
+  .srow .what{font-size:13.5px;color:var(--ink);line-height:1.5}
+  .srow .who{font-size:12.5px;color:var(--soft);line-height:1.55;margin-top:5px}
+  .srow.est{background:var(--panel)}
+  .srow.est .tag{color:var(--clay)}
+
+  .endnote{margin-top:46px;padding-top:20px;border-top:1px solid var(--rule);
+    font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--faint);line-height:1.9;max-width:92ch}
+
+  /* ---------- responsive ---------- */
+  @media(max-width:1020px){
+    .wrap{grid-template-columns:1fr}
+    .toc{position:static;height:auto;border-right:0;border-bottom:1px solid var(--rule);
+      padding:26px clamp(20px,5vw,40px) 22px}
+    .toc ol{display:none}
+    .toc .stamp{margin-top:14px}
+    main{padding:30px clamp(20px,5vw,40px) 80px}
+  }
+  @media(max-width:620px){
+    body{font-size:15.5px}
+    h1{font-size:30px;line-height:1.06}
+    h2{font-size:21px;max-width:none}
+    p{max-width:none}
+    .band{grid-template-columns:1fr 1fr}
+    .band > div{border-right:0;border-bottom:1px solid var(--rule);padding:14px 14px 14px 0}
+    .rrow,.axis{grid-template-columns:1fr auto;gap:8px 12px}
+    .rtrack{grid-column:1/-1;order:3}
+    .rval{text-align:right}
+    .axis .ticks{grid-column:1/-1}
+    .axis > div:first-child{display:none}
+    .cols{height:150px;gap:12px}
+    .clabs{gap:12px}
+    .srow{grid-template-columns:1fr;gap:6px}
+    table{font-size:13px}
+    td,th{padding-right:10px}
+    td.n,th.n{white-space:normal}
+    td.ix{padding-left:0}
+    .cards{grid-template-columns:1fr}
+  }
+
+  /* ---------- print ---------- */
+  @media print{
+    @page{size:letter portrait;margin:0.6in 0.65in 0.7in}
+    body{background:#fff;font-size:10.5pt}
+    .wrap{display:block;max-width:none}
+    .toc{display:none}
+    main{padding:0}
+    section{padding-top:26px}
+    h1{font-size:30pt}
+    h2{font-size:17pt}
+    figure,table,.cards,.ranges,.cols,.flag{break-inside:avoid}
+    a{color:var(--ink);border-bottom:0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc">
+  <div class="mark">Mindbody Associates<span>Acquisition review</span></div>
+  <ol id="toclist"></ol>
+  <div class="stamp">Confidential<br>Version 1.0<br>13 Oct 2026</div>
+</nav>
+
+<main>
+
+  <header class="mast">
+    <div class="kicker">Business review &amp; market analysis</div>
+    <h1>A Phoenix concierge panel, priced as a practice.</h1>
+    <p class="deck">Seventeen years, roughly 400 prepaid members, $257,526 of seller's discretionary earnings, and a $435,000 ask. The economics work or fail on a single question: who sits in the chair after closing.</p>
+    <div class="byline">
+      <span>Target · <b>17-yr concierge family practice, Phoenix AZ</b></span>
+      <span>Listing · <b>BizBuySell 2506062</b></span>
+      <span>Prepared for · <b>Mindbody Associates</b></span>
+    </div>
+  </header>
+
+  <section id="s1">
+    <div class="snum">The listing</div>
+    <h2>The headline numbers</h2>
+    <figure>
+      <div class="band">
+        <div><div class="n">$435K</div><div class="l">Asking price<br>seller financing offered</div></div>
+        <div><div class="n">$795K</div><div class="l">2025 revenue<br>as reported</div></div>
+        <div><div class="n">$258K</div><div class="l">Seller's discretionary<br>earnings · 32.4% margin</div></div>
+        <div><div class="n teal">1.69&times;</div><div class="l">Price to SDE<br>vs typical 1.5&ndash;3&times;</div></div>
+        <div><div class="n">~400</div><div class="l">Members at roughly<br>$1,800 per year</div></div>
+      </div>
+      <figcaption><b>Source</b>BizBuySell listing 2506062. Seller-reported, unaudited.</figcaption>
+    </figure>
+    <p class="lead">Membership is effectively the whole business. Four hundred members at $1,800 is about $720K of the $795K reported, leaving roughly $75K of ancillary revenue.</p>
+    <p>The practice is priced below the normal multiple range for a business this size, and that discount is doing work. It is compensation for a risk the listing does not price explicitly, which is the subject of sections three and four.</p>
+  </section>
+
+  <section id="s2">
+    <div class="snum">Operating profile</div>
+    <h2>What the practice actually is</h2>
+    <figure>
+      <table>
+        <thead><tr><th>Attribute</th><th>As listed</th><th>Read</th></tr></thead>
+        <tbody>
+          <tr><td>Tenure</td><td>17 years</td><td>Deep relationships, all of them with the departing physician.</td></tr>
+          <tr><td>Clinical week</td><td>32 hours</td><td>A lifestyle practice. Capacity exists to extend hours, not to scale.</td></tr>
+          <tr><td>Location</td><td>Hospital campus, Phoenix</td><td>Referral adjacency and credibility. Confirm the lease and that campus status transfers.</td></tr>
+          <tr><td>Clinical staff</td><td>NP, 5+ years, staying on</td><td>The only continuity anchor in the deal.</td></tr>
+          <tr><td>Panel age</td><td>65% over 60</td><td>Engaged, high-utilization, and structurally eroding.</td></tr>
+          <tr><td>Five-year growth</td><td>+17.5%</td><td>About 3.3% a year, below medical inflation. Flat in real terms.</td></tr>
+          <tr><td>Terms</td><td>Seller financing offered</td><td>Leverage for a retention holdback or earnout.</td></tr>
+        </tbody>
+      </table>
+      <figcaption><b>Source</b>BizBuySell listing 2506062.</figcaption>
+    </figure>
+  </section>
+
+  <section id="s3">
+    <div class="snum">Issue one</div>
+    <h2>The margin is a salary</h2>
+    <p class="lead">Seller's discretionary earnings include the owner's compensation. A replacement family physician in Phoenix costs roughly $230,000 to $280,000 in total compensation.</p>
+    <figure>
+      <div class="cards">
+        <div class="card"><div class="t">Path A</div><h3>Owner-physician in the chair</h3><p>A Mindbody Associates physician takes the chair. The $258K is real earnings, the multiple is genuinely low, and the deal stands on its own numbers.</p></div>
+        <div class="card"><div class="t">Path B</div><h3>Hire a replacement</h3><p>Subtract market compensation from $258K and the practice is at or near break-even before a single member leaves.</p></div>
+        <div class="card"><div class="t">Path C</div><h3>Cross-coverage</h3><p>Partial physician oversight with the NP carrying volume. Lower cost, but concierge members pay for physician access. Test this against the member agreements before assuming it holds.</p></div>
+      </div>
+      <figcaption><b>Source</b>Phoenix family medicine compensation bands per MGMA and AAFP published data.</figcaption>
+    </figure>
+    <div class="pull"><p>Without a physician who will actually practice in it, the headline SDE is not earnings. It is the price of the labor the buyer now has to go buy.</p></div>
+  </section>
+
+  <section id="s4">
+    <div class="snum">Issue two</div>
+    <h2>Members pay for a doctor, not a clinic</h2>
+    <p>Seventeen years of relationship is the entire asset, and it walks out at closing. Fixed costs do not fall with member count: rent, the NP, front office, and EHR hold flat, so every lost member comes almost entirely out of margin.</p>
+    <figure>
+      <table>
+        <thead><tr><th>Transition attrition</th><th class="n">Members</th><th class="n">Membership revenue</th><th class="n">SDE estimate</th></tr></thead>
+        <tbody>
+          <tr><td>0%, the listing's implied case</td><td class="n">400</td><td class="n">$720K</td><td class="n">$258K</td></tr>
+          <tr><td>20%, low end of range</td><td class="n">320</td><td class="n">$576K</td><td class="n">~$115K</td></tr>
+          <tr class="hi"><td>30%, the planning case</td><td class="n">280</td><td class="n">$504K</td><td class="n">~$40&ndash;60K</td></tr>
+          <tr><td>40%, high end of range</td><td class="n">240</td><td class="n">$432K</td><td class="n">~$0&ndash;20K</td></tr>
+        </tbody>
+      </table>
+      <figcaption><b>Estimated</b>Attrition range reflects commonly cited concierge ownership-transition experience rather than a single published study. SDE at each level assumes fixed costs hold flat.</figcaption>
+    </figure>
+    <p>A panel that is 65% over 60 erodes further on its own, through mortality and Medicare transitions, regardless of how good the service is. At the 30% row the practice services its own purchase price slowly and does nothing else.</p>
+  </section>
+
+  <section id="s5">
+    <div class="snum">Market context</div>
+    <h2>The segment is growing and the data is noisy</h2>
+    <figure>
+      <div class="band">
+        <div><div class="n">$6.5&ndash;10.4B</div><div class="l">US concierge market<br>2026 estimates by source</div></div>
+        <div><div class="n">6.9&ndash;10.3%</div><div class="l">Reported<br>CAGR range</div></div>
+        <div><div class="n clay">~2,600</div><div class="l">Concierge and DPC<br>practices indexed nationally</div></div>
+        <div><div class="n teal">3% &rarr; 9%</div><div class="l">AAFP member DPC<br>participation, 2022&ndash;2023</div></div>
+        <div><div class="n">20&ndash;40K</div><div class="l">Projected US primary care<br>shortfall by 2036</div></div>
+      </div>
+      <figcaption><b>Sources</b>AAMC workforce projections · AAFP practice profile reporting · Concierge Medicine Today practice census · market size range per published industry research syntheses.</figcaption>
+    </figure>
+    <p>Treat the direction as reliable and the absolute market size as marketing. What is solid is the demand driver: a documented primary care shortage, tripling physician participation in retainer models, and a still-fragmented cottage industry of a few thousand practices nationally.</p>
+  </section>
+
+  <section id="s6">
+    <div class="snum">Pricing</div>
+    <h2>The underpricing claim checks out</h2>
+    <figure>
+      <div class="ranges">
+        <div class="rrow"><div class="rlab">One Medical, Phoenix<em>plus insurance billing</em></div><div class="rtrack"><div class="rbar" style="left:0.5%;width:3.5%"></div></div><div class="rval">$199</div></div>
+        <div class="rrow hi"><div class="rlab">This practice</div><div class="rtrack"><div class="rbar" style="left:35%;width:1.8%"></div></div><div class="rval">$1,800</div></div>
+        <div class="rrow"><div class="rlab">MDVIP / Specialdocs tier</div><div class="rtrack"><div class="rbar" style="left:36%;width:14%"></div></div><div class="rval">$1.8&ndash;2.5K</div></div>
+        <div class="rrow"><div class="rlab">Listing's quoted market</div><div class="rtrack"><div class="rbar" style="left:50%;width:20%"></div></div><div class="rval">$2.5&ndash;3.5K</div></div>
+        <div class="rrow"><div class="rlab">National concierge band</div><div class="rtrack"><div class="rbar" style="left:48%;width:52%"></div></div><div class="rval">$2.4&ndash;5.0K</div></div>
+        <div class="axis"><div></div><div class="ticks"><span>$0</span><span>$1,250</span><span>$2,500</span><span>$3,750</span><span>$5,000</span></div><div></div></div>
+      </div>
+      <figcaption><b>Sources</b>MDVIP published membership fees · One Medical membership pricing · Concierge Medicine Today retainer surveys.</figcaption>
+    </figure>
+    <p class="lead">At $1,800 the practice sits below the floor of the national band, not merely below the listing's quoted range. The headroom is real.</p>
+    <p>The timing is the problem. A 39% to 94% increase in the same year the founding physician leaves is the single most reliable way to lose the panel. The listing's claimed <strong>+$280K to $480K</strong> of repricing upside assumes full retention through that increase. Realistic capture is 40% to 60% of it, phased across two years, and it belongs in year two at the earliest.</p>
+  </section>
+
+  <section id="s7">
+    <div class="snum">Geography</div>
+    <h2>Strong metro, younger city</h2>
+    <figure>
+      <table>
+        <thead><tr><th>Metric</th><th class="n">Figure</th><th>Read</th></tr></thead>
+        <tbody>
+          <tr class="grp"><td colspan="3">County and metro</td></tr>
+          <tr><td>Maricopa County population</td><td class="n">4.72M</td><td>Growing roughly 0.76% in 2026</td></tr>
+          <tr><td>Seniors in Maricopa County</td><td class="n">742,814</td><td>One of the largest senior pools in the country</td></tr>
+          <tr><td>Phoenix MSA projection</td><td class="n">5.13 &rarr; 7.53M</td><td>2023 to 2060</td></tr>
+          <tr class="grp"><td colspan="3">Age concentration</td></tr>
+          <tr><td>Phoenix city, age 65+</td><td class="n">12.2%</td><td>Below the national average</td></tr>
+          <tr><td>Mesa, age 65+</td><td class="n">17.5%</td><td>Retiree density sits outside the city core</td></tr>
+        </tbody>
+      </table>
+      <figcaption><b>Sources</b>US Census QuickFacts, Maricopa County, Phoenix and Mesa · Arizona Office of Economic Opportunity population projections.</figcaption>
+    </figure>
+    <p>The metro tailwind is among the strongest in the country, but Phoenix proper is younger than the Valley around it. Retiree concentration sits in Scottsdale, Sun City, Mesa, and Surprise. A hospital-campus location draws from a wider radius, which helps, but this is not Sun City demographics and should not be modeled as if it were.</p>
+  </section>
+
+  <section id="s8">
+    <div class="snum">Competitive position</div>
+    <h2>The squeeze is on the middle</h2>
+    <figure>
+      <div class="cards">
+        <div class="card"><div class="t">Below &middot; $199/yr</div><h3>Capital-backed membership</h3><p>One Medical, now Amazon-owned, operates in Phoenix at roughly $199 a year plus insurance billing. It does not offer what a true concierge panel offers, but it anchors what patients believe access should cost.</p></div>
+        <div class="card"><div class="t">Adjacent &middot; $1.8&ndash;2.5K</div><h3>Branded concierge</h3><p>MDVIP and Specialdocs hold this tier with national marketing and a recognized name. A $1,800 independent practice competes with them head-on while carrying none of the brand support.</p></div>
+        <div class="card"><div class="t">Above &middot; $2.4&ndash;5K</div><h3>Premium retainer</h3><p>Where the margin lives. Moving up requires a service case the panel believes, which in practice means a physician they already trust or a materially better offering.</p></div>
+      </div>
+      <figcaption><b>Sources</b>One Medical pricing · MDVIP membership fees · Specialdocs.</figcaption>
+    </figure>
+    <p>Positioned at $1,800 the practice sits in the segment under pressure from both directions. The strategic move is up, not sideways, and that move needs a physician in place first.</p>
+  </section>
+
+  <section id="s9">
+    <div class="snum">Projections</div>
+    <h2>Base case: owner-physician, measured repricing</h2>
+    <figure>
+      <table>
+        <thead><tr><th></th><th class="n">Members</th><th class="n">Retainer</th><th class="n">Revenue</th><th class="n">SDE</th></tr></thead>
+        <tbody>
+          <tr><td>Year 1</td><td class="n">300</td><td class="n">$1,800</td><td class="n">~$600K</td><td class="n">~$150K</td></tr>
+          <tr><td>Year 2</td><td class="n">330</td><td class="n">$2,400</td><td class="n">~$870K</td><td class="n">~$270K</td></tr>
+          <tr><td>Year 3</td><td class="n">380</td><td class="n">$2,500</td><td class="n">~$1.05M</td><td class="n">~$340K</td></tr>
+          <tr class="sum"><td>Three-year cumulative SDE</td><td class="n"></td><td class="n"></td><td class="n"></td><td class="n">~$760K</td></tr>
+        </tbody>
+      </table>
+      <figcaption><b>Estimated</b>Assumes 25% transition attrition, no price change in year one, a 33% increase in year two held through year three, and modest net growth once the new physician is established. Fixed costs held flat. Ancillary revenue of ~$75K carried forward unchanged.</figcaption>
+    </figure>
+    <p>Against a $435,000 purchase, payback lands at roughly <strong>2.2 years</strong>.</p>
+  </section>
+
+  <section id="s10">
+    <div class="snum">Scenarios</div>
+    <h2>Three paths, two endpoints</h2>
+    <figure>
+      <div class="cols">
+        <div class="cbar a"><div class="amt">$340K</div><div class="fill" style="height:70%"></div></div>
+        <div class="cbar b"><div class="amt">$330K</div><div class="fill" style="height:68%"></div></div>
+        <div class="cbar c"><div class="amt">$120K</div><div class="fill" style="height:25%"></div></div>
+      </div>
+      <div class="clabs"><div>Base case</div><div>Aggressive reprice</div><div>Downside</div></div>
+      <figcaption><b>Estimated</b>Year three SDE by scenario. Downside figure is before physician compensation.</figcaption>
+    </figure>
+    <figure>
+      <table>
+        <thead><tr><th>Scenario</th><th>Assumption</th><th class="n">Y1 SDE</th><th class="n">Y3 rev</th><th class="n">Y3 SDE</th></tr></thead>
+        <tbody>
+          <tr><td>Base</td><td>Owner-physician, reprice in year two</td><td class="n">~$150K</td><td class="n">~$1.05M</td><td class="n">~$340K</td></tr>
+          <tr><td>Aggressive</td><td>Immediate reprice to $2,750, ~40% attrition</td><td class="n">~$215K</td><td class="n">~$1.0M</td><td class="n">~$330K</td></tr>
+          <tr class="hi"><td>Downside</td><td>40% attrition, no recovery, hired physician</td><td class="n">~$120K</td><td class="n">~$520K</td><td class="n">&lt; $0</td></tr>
+        </tbody>
+      </table>
+    </figure>
+    <p>The aggressive path reaches nearly the same endpoint through a worse first year and real reputational exposure in a referral-dependent market. The downside case is the one that matters.</p>
+    <div class="flag">
+      <div class="t">The scenario that decides it</div>
+      <p>$120K of SDE before physician compensation, against a $250K salary, is cash-flow negative for three years. That outcome requires nothing unusual to happen. It requires only that attrition lands at the high end of the normal range and that Mindbody Associates has to hire.</p>
+    </div>
+  </section>
+
+  <section id="s11">
+    <div class="snum">Risk</div>
+    <h2>Ranked by consequence</h2>
+    <figure>
+      <table>
+        <tbody>
+          <tr><td class="rk">1</td><td>Key person</td><td>Seventeen years of relationship is the asset and it exits at closing. Transitions commonly lose 20% to 40%.</td></tr>
+          <tr><td class="rk">2</td><td>Physician economics</td><td>SDE includes owner compensation. With a hired physician there is little or no margin left.</td></tr>
+          <tr><td class="rk">3</td><td>Panel age</td><td>65% over 60. Mortality and Medicare transitions erode the base annually regardless of service quality.</td></tr>
+          <tr><td class="rk">4</td><td>Price elasticity</td><td>Raising retainers in the same year the founder leaves is the highest-risk sequencing available.</td></tr>
+          <tr><td class="rk">5</td><td>Medicare interaction</td><td>Membership fees cannot cover services Medicare already pays for. The current agreement needs legal review.</td></tr>
+          <tr><td class="rk">6</td><td>Single point of failure</td><td>One site, one physician, one NP. No redundancy anywhere in the operation.</td></tr>
+          <tr><td class="rk">7</td><td>Tax friction</td><td>Retainer fees are access fees, not medical services, so they are not HSA or FSA eligible. A persistent sales objection.</td></tr>
+          <tr><td class="rk">8</td><td>Flat growth</td><td>+17.5% over five years is about 3.3% annually, below medical inflation. No organic growth to inherit.</td></tr>
+        </tbody>
+      </table>
+      <figcaption><b>Sources</b>CMS coverage guidance on charges for covered services · IRS Publication 502.</figcaption>
+    </figure>
+  </section>
+
+  <section id="s12">
+    <div class="snum">The case for it</div>
+    <h2>What is genuinely attractive</h2>
+    <figure>
+      <div class="cards">
+        <div class="card"><div class="t">Revenue quality</div><h3>Prepaid, cash-pay, recurring</h3><p>No payer mix, no denials, no days in A/R. Revenue is collected before service is delivered.</p></div>
+        <div class="card"><div class="t">Price</div><h3>1.69&times; SDE</h3><p>Small practices typically trade at 2&times; to 3&times;. The discount is compensation for key-person risk, which means that risk is already partly in the price. Seller financing adds room for a holdback.</p></div>
+        <div class="card"><div class="t">Margin</div><h3>32.4% SDE margin</h3><p>Above the median for practices this size, with confirmed pricing headroom against national retainer data on top of it.</p></div>
+        <div class="card"><div class="t">Market</div><h3>Senior in-migration</h3><p>Roughly 743,000 seniors in Maricopa County, in one of the strongest in-migration markets in the country, against a documented primary care shortage.</p></div>
+        <div class="card"><div class="t">Continuity</div><h3>The NP stays</h3><p>Five-plus years with the panel. The single most useful retention asset in the deal, and worth structuring around.</p></div>
+      </div>
+    </figure>
+  </section>
+
+  <section id="s13">
+    <div class="snum">Strategic read</div>
+    <h2>A panel, not a practice</h2>
+    <p class="lead">For a cognitive and brain health platform, 400 prepaid patients with 65% over 60 is not primarily a family medicine practice. It is a screening population, a GUIDE Model eligible cohort, and a trial recruitment base, in a state where a footprint may be wanted regardless.</p>
+    <figure>
+      <div class="band">
+        <div><div class="n">400</div><div class="l">Prepaid patients with an<br>existing care relationship</div></div>
+        <div><div class="n teal">~260</div><div class="l">Of them over 60<br>the screening cohort</div></div>
+        <div><div class="n">$435K</div><div class="l">Total cost of<br>acquiring the panel</div></div>
+        <div><div class="n clay">~$1,100</div><div class="l">Implied cost per member<br>before any practice earnings</div></div>
+      </div>
+      <figcaption><b>Estimated</b>Cost per member is the asking price divided by the current member count, shown as an acquisition benchmark rather than a valuation method.</figcaption>
+    </figure>
+    <p>Built from scratch, acquiring 400 engaged seniors costs well more than $435,000 in marketing spend and years of time. Valued as a panel rather than as a practice, the price looks materially different, and so does the attrition risk, because a panel used for screening and recruitment does not need every member to stay a concierge subscriber.</p>
+    <div class="pull"><p>Is operating a family medicine practice something Mindbody Associates wants, or is this the cheapest available route to a Phoenix patient base? The answer changes both the valuation method and the diligence list.</p></div>
+  </section>
+
+  <section id="s14">
+    <div class="snum">Diligence</div>
+    <h2>What has to be verified before an LOI</h2>
+    <figure>
+      <table>
+        <tbody>
+          <tr class="grp"><td colspan="2">The panel</td></tr>
+          <tr><td class="ix">Member agreements</td><td>Assignability on change of control, notice and cancellation terms, auto-renewal language</td></tr>
+          <tr><td class="ix">Membership history</td><td>Three years of month-by-month counts: joins, cancels, deaths</td></tr>
+          <tr><td class="ix">Age and payer profile</td><td>Full age distribution and how many members are Medicare-aligned</td></tr>
+          <tr class="grp"><td colspan="2">Compliance</td></tr>
+          <tr><td class="ix">Medicare interaction</td><td>Whether insurance billing runs alongside membership, and whether retainer scope touches covered services</td></tr>
+          <tr><td class="ix">Arizona entity structure</td><td>Who may hold the entity and how a non-physician owner structures around it</td></tr>
+          <tr><td class="ix">Malpractice</td><td>Tail coverage, who pays, and the claims history</td></tr>
+          <tr class="grp"><td colspan="2">The transition</td></tr>
+          <tr><td class="ix">Seller commitment</td><td>Willingness to stay twelve months, and whether an earnout or retention holdback is on the table</td></tr>
+          <tr><td class="ix">NP agreement</td><td>Employment terms, non-compete, and whether she would carry panel continuity</td></tr>
+          <tr><td class="ix">Lease</td><td>Remaining term, assignment rights, and whether hospital-campus status transfers</td></tr>
+          <tr class="grp"><td colspan="2">The numbers</td></tr>
+          <tr><td class="ix">Financials</td><td>Three years of tax returns against the SDE add-back schedule, line by line</td></tr>
+          <tr><td class="ix">Ancillary revenue</td><td>What the ~$75K outside membership actually is, and whether it survives the transition</td></tr>
+        </tbody>
+      </table>
+    </figure>
+  </section>
+
+  <section id="s15">
+    <div class="snum">Basis</div>
+    <h2>Every figure and where it came from</h2>
+    <div class="srcs">
+      <div class="srow"><div class="tag">Listing</div><div><div class="what">Ask, revenue, SDE, member count, retainer, tenure, hours, staff, growth rate</div><div class="who">BizBuySell listing 2506062, seller-reported and unaudited. <a href="https://www.bizbuysell.com/business-opportunity/17-yr-concierge-family-practice-257k-sde-phoenix-az/2506062/" target="_blank">bizbuysell.com</a></div></div></div>
+      <div class="srow"><div class="tag">Shortage</div><div><div class="what">20,200 to 40,400 primary care physician shortfall by 2036</div><div class="who">Association of American Medical Colleges physician workforce projections. <a href="https://www.aamc.org/news/press-releases/new-aamc-report-shows-continuing-projected-physician-shortage" target="_blank">aamc.org</a></div></div></div>
+      <div class="srow"><div class="tag">DPC growth</div><div><div class="what">Member participation 3% in 2022 to 9% in 2023</div><div class="who">American Academy of Family Physicians practice profile reporting. <a href="https://www.aafp.org/pubs/fpm/issues.html" target="_blank">aafp.org</a></div></div></div>
+      <div class="srow"><div class="tag">Retainers</div><div><div class="what">$2,400 to $5,000 national band; $1,800 to $2,500 branded tier</div><div class="who">MDVIP published fees and Concierge Medicine Today retainer surveys. <a href="https://www.mdvip.com/about-mdvip/membership-fees" target="_blank">mdvip.com</a> &middot; <a href="https://conciergemedicinetoday.org/" target="_blank">conciergemedicinetoday.org</a></div></div></div>
+      <div class="srow"><div class="tag">Competition</div><div><div class="what">$199 per year Phoenix membership plus insurance billing</div><div class="who">One Medical published membership pricing. <a href="https://www.onemedical.com/membership/" target="_blank">onemedical.com</a></div></div></div>
+      <div class="srow"><div class="tag">Demographics</div><div><div class="what">4.72M county population, 742,814 seniors, 12.2% and 17.5% age 65+ shares</div><div class="who">US Census Bureau QuickFacts for Maricopa County, Phoenix, and Mesa. <a href="https://www.census.gov/quickfacts/maricopacountyarizona" target="_blank">census.gov</a></div></div></div>
+      <div class="srow"><div class="tag">Projections</div><div><div class="what">Phoenix MSA 5.13M in 2023 to 7.53M in 2060</div><div class="who">Arizona Office of Economic Opportunity population projections. <a href="https://www.azcommerce.com/oeo/population/population-projections/" target="_blank">azcommerce.com</a></div></div></div>
+      <div class="srow"><div class="tag">Physician cost</div><div><div class="what">$230K to $280K total compensation, Phoenix family medicine</div><div class="who">MGMA and AAFP published compensation bands. <a href="https://www.mgma.com/mgma-data" target="_blank">mgma.com</a> &middot; <a href="https://www.aafp.org/family-physician/practice-and-career/managing-your-career/physician-compensation.html" target="_blank">aafp.org</a></div></div></div>
+      <div class="srow"><div class="tag">Tax</div><div><div class="what">Retainer fees not HSA or FSA eligible</div><div class="who">IRS Publication 502, treatment of access fees versus qualified medical expenses. <a href="https://www.irs.gov/publications/p502" target="_blank">irs.gov</a></div></div></div>
+      <div class="srow"><div class="tag">Medicare</div><div><div class="what">Limits on charging membership fees for services Medicare covers</div><div class="who">CMS coverage guidance. <a href="https://www.cms.gov/medicare/coverage/coverage-general-information" target="_blank">cms.gov</a></div></div></div>
+      <div class="srow est"><div class="tag">Estimated</div><div><div class="what">Attrition bands, SDE sensitivities, all three scenarios, and cost per member</div><div class="who">Modeled, not sourced. The 20% to 40% attrition range reflects commonly cited concierge transition experience rather than a single published study. SDE at each attrition level assumes fixed costs hold flat. Scenario revenue and SDE are derived from the listing figures using the stated member, pricing, and cost assumptions. The $6.5B to $10.4B market range reflects the spread across published industry research syntheses and should be read as directional.</div></div></div>
+    </div>
+    <div class="endnote">
+      Prepared for Mindbody Associates · Confidential · Version 1.0 · 13 October 2026<br>
+      Listing figures are as published by the seller and have not been verified. Nothing in this document substitutes for financial, legal, or clinical diligence.
+    </div>
+  </section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  var secs = Array.prototype.slice.call(document.querySelectorAll('main section'));
+  var list = document.getElementById('toclist');
+  var links = [];
+  secs.forEach(function(s){
+    var label = s.querySelector('.snum').textContent.trim();
+    var li = document.createElement('li');
+    var a = document.createElement('a');
+    a.href = '#' + s.id;
+    a.textContent = label;
+    li.appendChild(a); list.appendChild(li); links.push(a);
+  });
+  function sync(){
+    var best = 0, y = window.scrollY + 120;
+    secs.forEach(function(s, i){ if(s.offsetTop <= y) best = i; });
+    links.forEach(function(a, i){ a.classList.toggle('on', i === best); });
+  }
+  window.addEventListener('scroll', sync, {passive:true});
+  window.addEventListener('resize', sync);
+  sync();
+})();
+</script>
+</body>
+</html>
